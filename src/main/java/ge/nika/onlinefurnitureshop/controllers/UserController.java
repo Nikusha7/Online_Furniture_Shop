@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping
 public class UserController {
 
     private final UserService userService;
@@ -19,11 +19,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String mainPage(Model model) {
-        System.out.println("URL WAS INVOKED");
-        model.addAttribute("user", new User());
+    @GetMapping("/home")
+    public String homePage() {
+        System.out.println("home page was invoked!");
+//        model.addAttribute("user", new User());
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String loginPage(Model model){
+        System.out.println("login page was invoked!");
+        model.addAttribute("user", new User());
+        return "html/login/login";
     }
 
 

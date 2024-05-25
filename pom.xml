@@ -35,11 +35,11 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Spring Security for securing the application with authentication and authorization -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
+<!--         Spring Security for securing the application with authentication and authorization-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
         <!-- Thymeleaf for server-side rendering of HTML templates -->
         <dependency>
@@ -68,11 +68,11 @@
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
 
-        <!-- Thymeleaf Extras for Spring Security integration in Thymeleaf templates -->
-<!--        <dependency>-->
-<!--            <groupId>org.thymeleaf.extras</groupId>-->
-<!--            <artifactId>thymeleaf-extras-springsecurity6</artifactId>-->
-<!--        </dependency>-->
+<!--         Thymeleaf Extras for Spring Security integration in Thymeleaf templates -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
 
         <!-- Databases -->
         <!-- PostgreSQL JDBC driver for connecting to PostgreSQL databases -->

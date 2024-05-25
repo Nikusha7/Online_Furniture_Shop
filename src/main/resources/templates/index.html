@@ -15,7 +15,8 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <img th:src="@{/logos/logo9.png}" width="125">
+                <a th:href="@{/home}"> <img th:src="@{/logos/logo9.png}" width="125">
+                </a>
             </div>
             <nav>
                 <ul id="MenuItems">
@@ -23,7 +24,6 @@
                     <li><a th:href="@{/products}">Products</a></li>
                     <li><a th:href="@{/about}">About</a></li>
                     <li><a th:href="@{/contact}">Contact</a></li>
-                    <li><a th:href="@{/register}">Register</a></li>
                     <li><a th:href="@{/login}">Login</a></li>
                 </ul>
             </nav>
@@ -102,7 +102,6 @@
         }
     }
 </script>
-
 
 </body>
 
