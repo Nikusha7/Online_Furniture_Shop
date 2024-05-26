@@ -22,7 +22,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/home").permitAll() //allow all users to access /home page
+                        .requestMatchers("/home","/register").permitAll() //allow all users to access /home page
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/icons/**", "/logos/**").permitAll() // Allow access to static resources
                         .requestMatchers("/admin/**").hasRole("ADMIN") // Allow only users with ADMIN role to access /admin/**
                         .requestMatchers("/user/**").hasRole("USER")

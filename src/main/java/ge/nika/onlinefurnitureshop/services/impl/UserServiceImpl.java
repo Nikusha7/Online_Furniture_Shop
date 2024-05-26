@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    @Override
+    public void registerUser(User user) {
+        userRepository.save(user);
+    }
+
 }

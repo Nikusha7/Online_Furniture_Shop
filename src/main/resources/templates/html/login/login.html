@@ -47,18 +47,18 @@
                         <span th:onclick="register()">Register</span>
                         <hr id="Indicator">
                     </div>
-                    <form id="LoginForm" th:action="@{/login}" method="post">
-                        <input type="text" placeholder="Username">
-                        <input type="password" placeholder="Password">
+                    <form id="LoginForm" th:action="@{/login-user}" method="post">
+                        <input type="email" th:name="email" placeholder="email" required>
+                        <input type="password" th:name="password" placeholder="Password" required>
                         <button type="submit" class="btn">Login</button>
                         <a th:href="@{/forgot-password}">Forgot password</a>
                     </form>
 
-                    <form id="RegForm" th:action="@{/register}" method="post">
-                        <input type="text" placeholder="Name">
-                        <input type="text" placeholder="Lastname">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
+                    <form id="RegForm" th:action="@{/register}" th:object="${userDTO}" method="post">
+                        <input type="text" th:field="*{firstName}" placeholder="First Name" required>
+                        <input type="text" th:field="*{lastName}" placeholder="Last Name" required>
+                        <input type="email" th:field="*{email}" placeholder="Email" required>
+                        <input type="password" th:field="*{password}" placeholder="Password" required>
                         <button type="submit" class="btn">Register</button>
                     </form>
                 </div>
