@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .loginPage("/login-user")
                         .permitAll())
                 .logout(LogoutConfigurer::permitAll);
 

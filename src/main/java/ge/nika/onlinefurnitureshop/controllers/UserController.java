@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping
 public class UserController {
@@ -31,32 +33,42 @@ public class UserController {
     public String loginPage(Model model) {
         System.out.println("login page was invoked!");
         model.addAttribute("userDTO", new UserDTO());
+
         return "html/login/login";
     }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("userDTO") UserDTO userDTO, Model model) {
-        System.out.println("UserDTO to register: "+userDTO.toString());
-        String role = "USER";
-        User user = User.builder()
-                .firstName(userDTO.getFirstName())
-                .lastName(userDTO.getLastName())
-                .email(userDTO.getEmail())
-                .role(role)
-                .password(passwordEncoder.encode(userDTO.getPassword()))
-                .build();
-        System.out.println("User entity ready to register: "+user.toString());
-        model.addAttribute("user", user);
+        System.out.println("UserDTO to register: " + userDTO.toString());
+        Optional<User> checkUser = userService.findByEmail(userDTO.getEmail());
+        if (!checkUser.isEmpty()) {
+            System.out.println("USER ALREADY EXISTS, YOU CAN'T USE THAT EMAIL");
+        } else {
+            String role = "USER";
+            User user = User.builder()
+                    .firstName(userDTO.getFirstName())
+                    .lastName(userDTO.getLastName())
+                    .email(userDTO.getEmail())
+                    .role(role)
+                    .password(passwordEncoder.encode(userDTO.getPassword()))
+                    .build();
+            System.out.println("User entity ready to register: " + user.toString());
+            model.addAttribute("user", user);
 
-        userService.registerUser(user);
-
+            userService.registerUser(user);
+        }
         return "redirect:/home";
     }
 
     @PostMapping("/login-user")
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
-        System.out.println("User tries to log in with email: "+email+", and pass: "+password);
-
+        System.out.println("User tries to log in:\nemail:" + email + "\npassword:" + password);
+        Optional<User> user = userService.findByEmail(email);
+        if (user.isEmpty()) {
+            System.out.println("USER DOES NOT EXISTS");
+        } else {
+            System.out.println("User: " + user);
+        }
         return "redirect:/home";
     }
 }
