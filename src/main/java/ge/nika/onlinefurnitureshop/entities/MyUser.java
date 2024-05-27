@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
         // Index created on the email column for efficient email-based queries
         @Index(name = "idx_user_email", columnList = "email")
 })
-public class User {
+public class MyUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

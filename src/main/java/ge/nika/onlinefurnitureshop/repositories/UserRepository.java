@@ -1,11 +1,11 @@
 package ge.nika.onlinefurnitureshop.repositories;
 
-import ge.nika.onlinefurnitureshop.entities.User;
+import ge.nika.onlinefurnitureshop.entities.MyUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 public interface UserRepository
-        extends JpaRepository<User, Integer> {
-    Optional<User> findByEmail(String email);
+        extends JpaRepository<MyUser, Integer> {
+    Optional<MyUser> findByEmail(String email);
 }

@@ -3,7 +3,7 @@ package ge.nika.onlinefurnitureshop.dtos;
 import lombok.*;
 
 @Data
-public class UserDTO {
+public class MyUserDTO {
     private String firstName;
     private String lastName;
     private String email;

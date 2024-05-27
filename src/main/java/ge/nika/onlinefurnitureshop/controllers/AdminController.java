@@ -10,22 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-//    private final UserServiceImpl userServiceImpl;
 
-//    public AdminController(UserServiceImpl userServiceImpl) {
-//        this.userServiceImpl = userServiceImpl;
-//    }
-
-    @GetMapping
+    @GetMapping("/home")
     public String adminPage() {
         System.out.println("admin mainpage was called");
         return "html/admin/admin_panel";
     }
 
-//    @GetMapping("/users")
-//    public String listUsers(Model model) {
-//        model.addAttribute("users", userServiceImpl.getAllUsers());
-//        return "admin_panel";
-//    }
 
 }

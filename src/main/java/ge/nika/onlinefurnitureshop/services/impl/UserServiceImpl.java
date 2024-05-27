@@ -1,6 +1,6 @@
 package ge.nika.onlinefurnitureshop.services.impl;
 
-import ge.nika.onlinefurnitureshop.entities.User;
+import ge.nika.onlinefurnitureshop.entities.MyUser;
 import ge.nika.onlinefurnitureshop.repositories.UserRepository;
 import ge.nika.onlinefurnitureshop.services.UserService;
 import org.springframework.stereotype.Service;
@@ -18,17 +18,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<MyUser> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public void registerUser(User user) {
-        userRepository.save(user);
+    public void registerUser(MyUser myUser) {
+        userRepository.save(myUser);
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
+    public Optional<MyUser> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

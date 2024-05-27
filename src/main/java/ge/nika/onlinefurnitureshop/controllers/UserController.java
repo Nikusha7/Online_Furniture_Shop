@@ -1,7 +1,7 @@
 package ge.nika.onlinefurnitureshop.controllers;
 
-import ge.nika.onlinefurnitureshop.dtos.UserDTO;
-import ge.nika.onlinefurnitureshop.entities.User;
+import ge.nika.onlinefurnitureshop.dtos.MyUserDTO;
+import ge.nika.onlinefurnitureshop.entities.MyUser;
 import ge.nika.onlinefurnitureshop.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,43 +32,45 @@ public class UserController {
     @GetMapping("/login")
     public String loginPage(Model model) {
         System.out.println("login page was invoked!");
-        model.addAttribute("userDTO", new UserDTO());
+//        System.out.println("User tries to log in:\nemail:" + email + "\npassword:" + password);
+        model.addAttribute("userDTO", new MyUserDTO());
 
         return "html/login/login";
     }
 
-    @PostMapping("/register")
-    public String registerUser(@ModelAttribute("userDTO") UserDTO userDTO, Model model) {
-        System.out.println("UserDTO to register: " + userDTO.toString());
-        Optional<User> checkUser = userService.findByEmail(userDTO.getEmail());
-        if (!checkUser.isEmpty()) {
+    @PostMapping("/perform_register")
+    public String registerUser(@ModelAttribute("userDTO") MyUserDTO myUserDTO, Model model) {
+        System.out.println("UserDTO to register: " + myUserDTO.toString());
+        Optional<MyUser> checkUser = userService.findByEmail(myUserDTO.getEmail());
+        if (checkUser.isPresent()) {
             System.out.println("USER ALREADY EXISTS, YOU CAN'T USE THAT EMAIL");
         } else {
             String role = "USER";
-            User user = User.builder()
-                    .firstName(userDTO.getFirstName())
-                    .lastName(userDTO.getLastName())
-                    .email(userDTO.getEmail())
+            MyUser myUser = MyUser.builder()
+                    .firstName(myUserDTO.getFirstName())
+                    .lastName(myUserDTO.getLastName())
+                    .email(myUserDTO.getEmail())
                     .role(role)
-                    .password(passwordEncoder.encode(userDTO.getPassword()))
+                    .password(passwordEncoder.encode(myUserDTO.getPassword()))
                     .build();
-            System.out.println("User entity ready to register: " + user.toString());
-            model.addAttribute("user", user);
+            System.out.println("User entity ready to register: " + myUser.toString());
+            model.addAttribute("user", myUser);
 
-            userService.registerUser(user);
+            userService.registerUser(myUser);
         }
         return "redirect:/home";
     }
 
-    @PostMapping("/login-user")
-    public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
-        System.out.println("User tries to log in:\nemail:" + email + "\npassword:" + password);
-        Optional<User> user = userService.findByEmail(email);
-        if (user.isEmpty()) {
-            System.out.println("USER DOES NOT EXISTS");
-        } else {
-            System.out.println("User: " + user);
-        }
-        return "redirect:/home";
-    }
+//    @PostMapping("/perform_login")
+//    public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
+//        System.out.println("User tries to log in:\nemail:" + email + "\npassword:" + password);
+//        Optional<MyUser> user = userService.findByEmail(email);
+//        if (user.isEmpty()) {
+//            System.out.println("USER DOES NOT EXISTS");
+//        } else {
+//            System.out.println("User: " + user);
+//        }
+//        return "redirect:/home";
+//    }
+
 }
