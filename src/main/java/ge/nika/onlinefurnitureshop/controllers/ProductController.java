@@ -2,7 +2,6 @@ package ge.nika.onlinefurnitureshop.controllers;
 
 import ge.nika.onlinefurnitureshop.entities.Product;
 import ge.nika.onlinefurnitureshop.services.ProductService;
-import ge.nika.onlinefurnitureshop.services.impl.ProductServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
