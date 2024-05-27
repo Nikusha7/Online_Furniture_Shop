@@ -6,18 +6,16 @@ import ge.nika.onlinefurnitureshop.entities.Role;
 import ge.nika.onlinefurnitureshop.repositories.RoleRepository;
 import ge.nika.onlinefurnitureshop.services.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collections;
 import java.util.Optional;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Controller
 @RequestMapping
@@ -51,16 +49,16 @@ public class UserController {
         return "html/login/login";
     }
 
-    @PostMapping("/perform_login")
-    public String performLogin(@RequestParam(name = "username") String email,
-                               @RequestParam(name = "password") String password) {
-        System.out.println("User tries to log in email: "+email+"\n password: "+password);
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("Successfully logged in");
-        return "redirect:/home";
-    }
+//    @PostMapping("/perform_login")
+//    public String performLogin(@RequestParam(name = "username") String email,
+//                               @RequestParam(name = "password") String password) {
+//        System.out.println("User tries to log in email: "+email+"\n password: "+password);
+//        Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(email, password));
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        System.out.println("Successfully logged in");
+//        return "redirect:/home";
+//    }
 
     @PostMapping("/perform_register")
     public String registerUser(@ModelAttribute("userDTO") MyUserDTO myUserDTO, Model model) {
