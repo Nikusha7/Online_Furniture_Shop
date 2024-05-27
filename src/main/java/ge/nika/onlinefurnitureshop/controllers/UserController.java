@@ -2,23 +2,36 @@ package ge.nika.onlinefurnitureshop.controllers;
 
 import ge.nika.onlinefurnitureshop.dtos.MyUserDTO;
 import ge.nika.onlinefurnitureshop.entities.MyUser;
+import ge.nika.onlinefurnitureshop.entities.Role;
+import ge.nika.onlinefurnitureshop.repositories.RoleRepository;
 import ge.nika.onlinefurnitureshop.services.UserService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Optional;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Controller
 @RequestMapping
 public class UserController {
-
+    private AuthenticationManager authenticationManager;
     private final UserService userService;
+    private RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(AuthenticationManager authenticationManager, UserService userService,
+                          RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.authenticationManager = authenticationManager;
         this.userService = userService;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -38,23 +51,37 @@ public class UserController {
         return "html/login/login";
     }
 
+    @PostMapping("/perform_login")
+    public String performLogin(@RequestParam(name = "username") String email,
+                               @RequestParam(name = "password") String password) {
+        System.out.println("User tries to log in email: "+email+"\n password: "+password);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println("Successfully logged in");
+        return "redirect:/home";
+    }
+
     @PostMapping("/perform_register")
     public String registerUser(@ModelAttribute("userDTO") MyUserDTO myUserDTO, Model model) {
         System.out.println("UserDTO to register: " + myUserDTO.toString());
         Optional<MyUser> checkUser = userService.findByEmail(myUserDTO.getEmail());
+
         if (checkUser.isPresent()) {
             System.out.println("USER ALREADY EXISTS, YOU CAN'T USE THAT EMAIL");
+            return "redirect:/home";
         } else {
-            String role = "USER";
+            Role roles = roleRepository.findByName("USER").get();
+
             MyUser myUser = MyUser.builder()
                     .firstName(myUserDTO.getFirstName())
                     .lastName(myUserDTO.getLastName())
                     .email(myUserDTO.getEmail())
-                    .role(role)
+                    .roles(Collections.singletonList(roles))
                     .password(passwordEncoder.encode(myUserDTO.getPassword()))
                     .build();
+
             System.out.println("User entity ready to register: " + myUser.toString());
-            model.addAttribute("user", myUser);
 
             userService.registerUser(myUser);
         }

@@ -1,22 +1,16 @@
 package ge.nika.onlinefurnitureshop.security;
 
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -29,26 +23,26 @@ public class SecurityConfiguration {
         this.userDetailService = userDetailService;
     }
 
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/home","/perform_register").permitAll() //allow all users to access /home page
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/icons/**", "/logos/**").permitAll() // Allow access to static resources
-                        .requestMatchers("/admin/**").hasRole("ADMIN") // Allow only users with ADMIN role to access /admin/**
-//                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/", "/home").permitAll()
+                        .requestMatchers("/perform_register").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/icons/**", "/logos/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/home")
-                        .permitAll())
+                        .loginProcessingUrl("/perform_login")
+                        .permitAll()
+                )
                 .logout(LogoutConfigurer::permitAll);
 
-        return httpSecurity.build();
+        return http.build();
     }
+
 
 //    @Bean
 //    public UserDetailsService userDetailsService() {
@@ -68,17 +62,10 @@ public class SecurityConfiguration {
 //        return new InMemoryUserDetailsManager(normalUser, adminUser);
 //    }
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return userDetailService;
-    }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
