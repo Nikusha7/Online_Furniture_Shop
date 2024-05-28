@@ -1,6 +1,8 @@
 package ge.nika.onlinefurnitureshop.controllers;
 
 import ge.nika.onlinefurnitureshop.entities.MyUser;
+import ge.nika.onlinefurnitureshop.entities.Product;
+import ge.nika.onlinefurnitureshop.services.ProductService;
 import ge.nika.onlinefurnitureshop.services.UserService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -14,17 +16,21 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
-    public AdminController(UserService userService){
+    private final ProductService productService;
+    public AdminController(UserService userService, ProductService productService){
         this.userService = userService;
+        this.productService = productService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public String adminPage(Model model) {
         System.out.println("admin panel was invoked");
 
         List<MyUser> users = userService.getAllUsers();
+        List<Product> products = productService.getAllProducts();
 
         model.addAttribute("users", users);
+        model.addAttribute("products", products);
         return "html/admin/admin_panel";
     }
 

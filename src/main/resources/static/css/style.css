@@ -207,6 +207,10 @@ ul {
     .col-2 {
         flex-basis: 100%;
     }
+
+    .single-product .row{
+        text-align: left;
+    }
 }
 
 

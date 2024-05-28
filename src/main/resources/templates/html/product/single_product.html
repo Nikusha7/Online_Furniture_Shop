@@ -38,52 +38,90 @@
 </div>
 
 
-<!-- All Products -->
-<div class="small-container">
-    <div class="row row-2">
-        <h2>All Products</h2>
-        <select>
-            <option>Default Sorting</option>
-            <option>Sort By Name a-z</option>
-            <option>Sort By Name z-a</option>
-            <option>Price low to high</option>
-            <option>Price high to low</option>
-        </select>
-    </div>
-    <div class="row">
-        <div class="col-4" th:each="product : ${products}">
-            <a th:href="@{/products/single_product(id=${product.id})}">
-                <img th:src="@{${product.getImageUrl()}}" alt="Product Image">
-                <h4 th:text="${product.getName()}"></h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-alt"></i>
-                    <i class="fa fa-star-half-alt"></i>
-                </div>
-                <p th:text="${product.getPrice()}+'$'"></p>
-            </a>
-        </div>
-        <!-- Pagination -->
-        <div class="page-btn">
-        <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
-              th:classappend="${currentPage == pageNum ? ' active' : ''}">
-            <a th:text="${pageNum + 1}"
-               th:href="@{/products(page=${pageNum})}"></a>
-        </span>
-        </div>
+<!--Single Product-->
 
-        <!--    <div class="page-btn">-->
-        <!--        <span>1</span>-->
-        <!--        <span>2</span>-->
-        <!--        <span>3</span>-->
-        <!--        <span>4</span>-->
-        <!--        <span>&#8594</span>-->
-        <!--    </div>-->
+<div class="small-container single-product">
+    <div class="row">
+        <div class="col-2">
+            <img th:src="@{${product.getImageUrl()}}">
+        </div>
+        <div class="col-2">
+            <p th:text="'Home / '+${product.getCategory()}"></p>
+            <h1 th:text="${product.getName()}"></h1>
+            <h4 th:text="${product.getPrice()} + '$'">$</h4>
+            <select>
+                <option>Select Size</option>
+                <option>XXL</option>
+                <option>XL</option>
+                <option>Large</option>
+                <option>Medium</option>
+                <option>Small</option>
+            </select>
+            <input type="number" value="1">
+            <a th:href="@{/home}" class="btn">Add To Cart</a>
+            <h3>Product Details <i class="fa fa-indent"></i></h3>
+            <br>
+            <p th:text="'Modern taste to develop your lifestyle and become happier with:' + ${product.getDescription()}"></p>
+        </div>
     </div>
 </div>
 
+
+
+
+<!--4 products-->
+<div class="small-container">
+    <div class="row">
+        <div class="col-4">
+            <img th:src="@{/products/chair/chair1.jpg}">
+            <h4>Beige old style chair</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$150.00</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa19.jpg}">
+            <h4>Light silver armchair with foot placer</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$480.50</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/chair/chair3.jpg}">
+            <h4>Brown wooden soft chair</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$250.00</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa6.jpg}">
+            <h4>Dark brown 2 place sofa with foot placer</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$550.00</p>
+        </div>
+    </div>
+</div>
 
 <!--footer-->
 <div class="footer">
@@ -98,7 +136,7 @@
                 </div>
             </div>
             <div class="footer-col-2">
-                <img th:src="@{logos/logo1.jpg}">
+                <img th:src="@{/logos/logo1.jpg}">
                 <p>Bringing Comfort and Style to Your Home</p>
             </div>
             <div class="footer-col-3">
@@ -124,6 +162,7 @@
         <p class="copyright">All rights reserved FURNISHNOW Georgia © 2024-2025 </p>
     </div>
 </div>
+
 
 <!--js for toggle menu-->
 <script>

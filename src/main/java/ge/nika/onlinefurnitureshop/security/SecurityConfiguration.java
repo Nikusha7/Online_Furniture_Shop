@@ -27,7 +27,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home", "/products/**").permitAll()
+                        .requestMatchers("/", "/home", "/products/**","/single_product/**").permitAll()
                         .requestMatchers("/perform_register").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/icons/**", "/logos/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -36,6 +36,7 @@ public class SecurityConfiguration {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/perform_login")
+                        .defaultSuccessUrl("/home")
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
