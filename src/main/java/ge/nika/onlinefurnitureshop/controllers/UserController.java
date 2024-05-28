@@ -49,17 +49,6 @@ public class UserController {
         return "html/login/login";
     }
 
-//    @PostMapping("/perform_login")
-//    public String performLogin(@RequestParam(name = "username") String email,
-//                               @RequestParam(name = "password") String password) {
-//        System.out.println("User tries to log in email: "+email+"\n password: "+password);
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(email, password));
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        System.out.println("Successfully logged in");
-//        return "redirect:/home";
-//    }
-
     @PostMapping("/perform_register")
     public String registerUser(@ModelAttribute("userDTO") MyUserDTO myUserDTO, Model model) {
         System.out.println("UserDTO to register: " + myUserDTO.toString());
@@ -86,16 +75,5 @@ public class UserController {
         return "redirect:/home";
     }
 
-//    @PostMapping("/perform_login")
-//    public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
-//        System.out.println("User tries to log in:\nemail:" + email + "\npassword:" + password);
-//        Optional<MyUser> user = userService.findByEmail(email);
-//        if (user.isEmpty()) {
-//            System.out.println("USER DOES NOT EXISTS");
-//        } else {
-//            System.out.println("User: " + user);
-//        }
-//        return "redirect:/home";
-//    }
 
 }
