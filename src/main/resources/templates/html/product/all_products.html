@@ -7,8 +7,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/product.css}">
     <link rel="icon" th:href="@{/icons/icon1.jpg}" type="image/x-icon" id="favicon">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -39,58 +40,89 @@
 
 <!-- All Products -->
 <div class="small-container">
-    <h2>Products</h2>
+    <div class="row row-2">
+        <h2>All Products</h2>
+        <select>
+            <option>Default Sorting</option>
+            <option>Sort By Name a-z</option>
+            <option>Sort By Name z-a</option>
+            <option>Price low to high</option>
+            <option>Price high to low</option>
+        </select>
+    </div>
     <div class="row">
-        <div class="col-4">
-            <img th:src="@{/products/chair1.jpg}">
-            <h4>Product Description</h4>
+        <div class="col-4" th:each="product : ${products}">
+            <img th:src="@{${product.getImageUrl()}}" alt="Product Image">
+            <h4 th:text="${product.getName()}"></h4>
             <div class="rating">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <i class="fa fa-star-half-alt"></i>
             </div>
-            <p>$150.00</p>
+            <p th:text="${product.getPrice()}">$</p>
         </div>
-        <div class="col-4">
-            <img th:src="@{/products/chair2.jpg}">
-            <h4>Product Description</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$180.50</p>
-        </div>
-        <div class="col-4">
-            <img th:src="@{/products/chair3.jpg}">
-            <h4>Product Description</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$200.00</p>
-        </div>
-        <div class="col-4">
-            <img th:src="@{/products/chair4.jpg}">
-            <h4>Product Description</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$350.00</p>
-        </div>
+
+<!--        <div class="col-4">-->
+<!--            <img th:src="@{/products/chair/chair1.jpg}">-->
+<!--            <h4>Product Description</h4>-->
+<!--            <div class="rating">-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star-half-alt"></i>-->
+<!--                <i class="fa fa-star-half-alt"></i>-->
+<!--            </div>-->
+<!--            <p>$150.00</p>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <img th:src="@{/products/chair/chair2.jpg}">-->
+<!--            <h4>Product Description</h4>-->
+<!--            <div class="rating">-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star-half-alt"></i>-->
+<!--            </div>-->
+<!--            <p>$180.50</p>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <img th:src="@{/products/chair/chair3.jpg}">-->
+<!--            <h4>Product Description</h4>-->
+<!--            <div class="rating">-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star-half-alt"></i>-->
+<!--                <i class="fa fa-star-half-alt"></i>-->
+<!--            </div>-->
+<!--            <p>$200.00</p>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <img th:src="@{/products/chair/chair6.jpg}">-->
+<!--            <h4>Product Description</h4>-->
+<!--            <div class="rating">-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star"></i>-->
+<!--                <i class="fa fa-star-half-alt"></i>-->
+<!--            </div>-->
+<!--            <p>$350.00</p>-->
+<!--        </div>-->
+    </div>
+
+    <div class="page-btn">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>&#8594</span>
     </div>
 </div>
+
 
 
 <!--footer-->

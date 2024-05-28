@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Furniture Store</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/product.css}">
     <link rel="icon" th:href="@{/icons/icon1.jpg}" type="image/x-icon" id="favicon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -46,6 +48,135 @@
         </div>
     </div>
 </div>
+
+<!-- All Products -->
+<div class="small-container">
+    <h2 class="title">Exclusive Products</h2>
+    <div class="row">
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa7.jpg}">
+            <h4>soft White 3 place sofa</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$1500.00</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa8.jpg}">
+            <h4>Soft Gray 3 place sofa</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$1800.50</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa13.jpg}">
+            <h4>Beige 5 place pair sofa with pillows</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$2800.00</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa17.jpg}">
+            <h4>Light silver 3 place soft sofa with lie down space</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$3500.00</p>
+        </div>
+    </div>
+    <h2 class="title">Latest Products</h2>
+    <div class="row">
+        <div class="col-4">
+            <img th:src="@{/products/chair/chair1.jpg}">
+            <h4>Beige old style chair</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$150.00</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa19.jpg}">
+            <h4>Light silver armchair with foot placer</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$480.50</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/chair/chair3.jpg}">
+            <h4>Brown wooden soft chair</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$250.00</p>
+        </div>
+        <div class="col-4">
+            <img th:src="@{/products/sofa/sofa6.jpg}">
+            <h4>Dark brown 2 place sofa with foot placer</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+            </div>
+            <p>$550.00</p>
+        </div>
+    </div>
+</div>
+
+<!--Special Offer-->
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <img th:src="@{/products/sofa/sofa-special.jpg}" class="offer-img">
+            </div>
+            <div class="col-2">
+                <p>Exclusive offer available until the end of the week!</p>
+                <h2>Rawcliffe 4-Piece Sectional</h2>
+                <small>If you love the idea of contemporary style that’s ultra warm and inviting,
+                    the Rawcliffe sectional is casual refinement you’ll love living with.
+                    Lightening things up in a fresh neutral tone,
+                    this sectional is covered in a decadently soft microfiber that’s love at first touch.
+                </small>
+                <p><a th:href="@{/home}" class="btn">Buy Now &#8594;</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!--footer-->
 <div class="footer">

@@ -296,3 +296,19 @@ form a{
     transform: translateX(100px);
     transition: transform 1s;
 }
+
+/*special offer*/
+.offer{
+    background: radial-gradient(#9E9E9E, #fff);
+    margin-top: 80px;
+    padding:30px 0;
+}
+.col-2 .offer-img{
+    padding-right: 50px;
+}
+.col-2 p h2{
+    color: #333333;
+}
+small{
+    color: #555;
+}
