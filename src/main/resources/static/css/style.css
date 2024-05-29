@@ -99,6 +99,22 @@ p {
     margin-top: 70px;
 }
 
+/*--- Exclusive/Latest Products ---*/
+.small-container-products{
+    max-width: 1100px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+/*--- Special Offer ---*/
+.small-container-special-offer{
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
 /*footer*/
 .footer {
     background: #000;
@@ -215,7 +231,6 @@ ul {
 
 
 /*account page/login/registration*/
-
 .account-page {
     padding: 50px 0;
     background: radial-gradient(#9E9E9E, #fff);

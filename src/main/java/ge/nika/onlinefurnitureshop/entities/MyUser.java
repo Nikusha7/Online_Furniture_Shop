@@ -18,6 +18,7 @@ import java.util.List;
         // Index created on the email column for efficient email-based queries
         @Index(name = "idx_user_email", columnList = "email")
 })
+// change name
 public class MyUser {
 
     @Id

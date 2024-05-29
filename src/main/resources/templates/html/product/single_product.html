@@ -43,34 +43,49 @@
 <div class="small-container single-product">
     <div class="row">
         <div class="col-2">
-            <img th:src="@{${product.getImageUrl()}}">
+            <img th:src="@{${product.getImageUrl()}}" width="100%" id="ProductImg">
+            <div class="small-img-row">
+                <div class="small-img-col">
+                    <img th:src="@{/products/chair/chair16.jpg}" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img th:src="@{/products/armchair/chair3.jpg}" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img th:src="@{/products/armchair/chair28.jpg}" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img th:src="@{/products/chair/chair19.jpg}" width="100%" class="small-img">
+                </div>
+            </div>
         </div>
         <div class="col-2">
             <p th:text="'Home / '+${product.getCategory()}"></p>
             <h1 th:text="${product.getName()}"></h1>
-            <h4 th:text="${product.getPrice()} + '$'">$</h4>
-            <select>
-                <option>Select Size</option>
-                <option>XXL</option>
-                <option>XL</option>
-                <option>Large</option>
-                <option>Medium</option>
-                <option>Small</option>
-            </select>
+            <h4 th:text="${product.getPrice()} + '$'"></h4>
             <input type="number" value="1">
             <a th:href="@{/home}" class="btn">Add To Cart</a>
             <h3>Product Details <i class="fa fa-indent"></i></h3>
             <br>
-            <p th:text="'Modern taste to develop your lifestyle and become happier with:' + ${product.getDescription()}"></p>
+            <p th:text="
+            'Elevate your lifestyle with modern elegance and become happier with' + ${product.getDescription()} +'.
+            This stylish piece combines contemporary aesthetics with exceptional functionality,
+             enhancing your home with both form and comfort.' ">
+            </p>
         </div>
     </div>
 </div>
 
-
-
+<!-- title -->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Related Products</h2>
+        <p>View more</p>
+    </div>
+</div>
 
 <!--4 products-->
-<div class="small-container">
+<div class="small-container similar-products">
     <div class="row">
         <div class="col-4">
             <img th:src="@{/products/chair/chair1.jpg}">
@@ -179,6 +194,30 @@
     }
 </script>
 
+
+<!--js for product gallery-->
+<script>
+    var ProductImg = document.getElementById("ProductImg");
+    var SmallImg = document.getElementsByClassName("small-img");
+
+    for (var i = 0; i < SmallImg.length; i++) {
+        SmallImg[i].onclick = function () {
+            ProductImg.src = this.src;
+        }
+    }
+    // SmallImg[0].onClick = function(){
+    //     ProductImg.src = SmallImg[0].src;
+    // }
+    // SmallImg[1].onClick = function(){
+    //     ProductImg.src = SmallImg[1].src;
+    // }
+    // SmallImg[2].onClick = function(){
+    //     ProductImg.src = SmallImg[2].src;
+    // }
+    // SmallImg[3].onClick = function(){
+    //     ProductImg.src = SmallImg[3].src;
+    // }
+</script>
 <!-- Include the footer fragment -->
 <!--<div th:replace="../../fragments/footer/footer :: footer"></div>-->
 

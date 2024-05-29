@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,7 +23,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public String getAllProduct(@RequestParam(name="page", defaultValue = "0") int pageNumber, Model model) {
+    public String getAllProduct(@RequestParam(name = "page", defaultValue = "0") int pageNumber, Model model) {
         int pageSize = 12; // Display 12 products per page
         Pageable pageable = PageRequest.of(pageNumber, pageSize); //displaying 12 products
         Page<Product> products = productService.getProducts(pageable);

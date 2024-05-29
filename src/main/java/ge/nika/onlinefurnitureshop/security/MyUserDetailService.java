@@ -35,6 +35,15 @@ public class MyUserDetailService implements UserDetailsService {
         }
     }
 
+//    Igor approach
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
+//        Optional<MyUser> myUser = userService.findByEmail(email);
+//        if(myUser.isEmpty()) throw new UsernameNotFoundException("User not found by that email");
+//        return new PersonDetails(myUser.get());
+//    }
+
+
     private Collection<GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_"+role.getName())).collect(Collectors.toList());
     }

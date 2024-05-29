@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products - FURNISHNOW</title>
+    <title>Cart - FURNISHNOW</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/product.css}">
     <link rel="icon" th:href="@{/icons/icon1.jpg}" type="image/x-icon" id="favicon">
@@ -13,9 +13,6 @@
 </head>
 
 <body>
-
-<!-- Include the header fragment -->
-<!--<div th:replace="../../fragments/header/header :: header"></div>-->
 
 <div class="container">
     <div class="navbar">
@@ -37,51 +34,19 @@
     </div>
 </div>
 
-
-<!-- All Products -->
+<!--cart items details-->
 <div class="small-container">
-    <div class="row row-2">
-        <h2>All Products</h2>
-        <select>
-            <option>Default Sorting</option>
-            <option>Sort By Name a-z</option>
-            <option>Sort By Name z-a</option>
-            <option>Price low to high</option>
-            <option>Price high to low</option>
-        </select>
-    </div>
-    <div class="row">
-        <div class="col-4" th:each="product : ${products}">
-            <a th:href="@{/products/single_product(id=${product.id})}">
-                <img th:src="@{${product.getImageUrl()}}" alt="Product Image">
-                <h4 th:text="${product.getName()}"></h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-alt"></i>
-                    <i class="fa fa-star-half-alt"></i>
-                </div>
-                <p th:text="${product.getPrice()}+'$'"></p>
-            </a>
-        </div>
-        <!-- Pagination -->
-        <div class="page-btn">
-        <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
-              th:classappend="${currentPage == pageNum ? ' active' : ''}">
-            <a th:text="${pageNum + 1}"
-               th:href="@{/products(page=${pageNum})}"></a>
-        </span>
-        </div>
-
-        <!--    <div class="page-btn">-->
-        <!--        <span>1</span>-->
-        <!--        <span>2</span>-->
-        <!--        <span>3</span>-->
-        <!--        <span>4</span>-->
-        <!--        <span>&#8594</span>-->
-        <!--    </div>-->
-    </div>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        <td>Product Name</td>
+        <td><input type="number" value="1"></td>
+        <td>$50.00</td>
+        <td>Product</td>
+    </table>
 </div>
 
 
@@ -98,7 +63,7 @@
                 </div>
             </div>
             <div class="footer-col-2">
-                <img th:src="@{logos/logo1.jpg}">
+                <img th:src="@{/logos/logo1.jpg}">
                 <p>Bringing Comfort and Style to Your Home</p>
             </div>
             <div class="footer-col-3">
@@ -140,11 +105,6 @@
     }
 </script>
 
-<!-- Include the footer fragment -->
-<!--<div th:replace="fragments/footer/footer :: footer"></div>-->
-<!--<div th:replace="page-size :: page-size-panel"></div>-->
-
 
 </body>
-
 </html>

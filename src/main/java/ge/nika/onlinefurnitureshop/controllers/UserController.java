@@ -55,11 +55,14 @@ public class UserController {
         Optional<MyUser> checkUser = userService.findByEmail(myUserDTO.getEmail());
 
         if (checkUser.isPresent()) {
+//            return real view for user to know that
             System.out.println("USER ALREADY EXISTS, YOU CAN'T USE THAT EMAIL");
             return "redirect:/home";
         } else {
             Role roles = roleRepository.findByName("USER").get();
-
+/*
+implementations must be written service
+ */
             MyUser myUser = MyUser.builder()
                     .firstName(myUserDTO.getFirstName())
                     .lastName(myUserDTO.getLastName())

@@ -29,7 +29,9 @@
                     <li><a th:href="@{/login}">Login</a></li>
                 </ul>
             </nav>
+            <a th:href="@{/cart}">
             <img th:src="@{/icons/cart.png}" width="30px" height="30px">
+            </a>
             <img th:src="@{/icons/menu.png}" class="menu-icon" onclick="menutoggle()">
         </div>
         <div class="row">
@@ -49,8 +51,8 @@
     </div>
 </div>
 
-<!-- All Products -->
-<div class="small-container">
+<!-- Exclusive Products -->
+<div class="small-container-products">
     <h2 class="title">Exclusive Products</h2>
     <div class="row">
         <div class="col-4">
@@ -102,6 +104,7 @@
             <p>$3500.00</p>
         </div>
     </div>
+    <!-- Latest Products -->
     <h2 class="title">Latest Products</h2>
     <div class="row">
         <div class="col-4">
@@ -157,10 +160,10 @@
 
 <!--Special Offer-->
 <div class="offer">
-    <div class="small-container">
+    <div class="small-container-special-offer">
         <div class="row">
             <div class="col-2">
-                <img th:src="@{/products/sofa/sofa-special.jpg}" class="offer-img">
+                <img th:src="@{/products/sofa/sofa-special1.jpg}" class="offer-img">
             </div>
             <div class="col-2">
                 <p>Exclusive offer available until the end of the week!</p>
