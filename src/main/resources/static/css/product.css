@@ -157,12 +157,7 @@ input:focus {
     flex-basis: 24%;
     cursor: pointer;
 }
-
-
-/*similar products row*/
-.similar-products {
-    margin-top: 50px;
-}
+    
 
 
 /*media query for less than 600 screen size*/

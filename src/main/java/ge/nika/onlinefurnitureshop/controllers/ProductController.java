@@ -41,9 +41,11 @@ public class ProductController {
     @GetMapping("/single_product")
     public String getAllProduct(@RequestParam("id") Integer id, Model model) {
         Optional<Product> product = productService.getProductById(id);
-
-        model.addAttribute("product", product.get());
-
+        if(product.isPresent()) {
+            model.addAttribute("product", product.get());
+        }else{
+            System.out.println("Product with ID: "+id+" does not exists!!!!!!!!");
+        }
         return "html/product/single_product";
     }
 }
