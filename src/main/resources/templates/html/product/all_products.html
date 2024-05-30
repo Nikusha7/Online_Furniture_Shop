@@ -42,13 +42,15 @@
 <div class="small-container">
     <div class="row row-2">
         <h2>All Products</h2>
-        <select>
-            <option>Default Sorting</option>
-            <option>Sort By Name a-z</option>
-            <option>Sort By Name z-a</option>
-            <option>Price low to high</option>
-            <option>Price high to low</option>
+        <form th:action="@{/products}" method="get">
+        <select name="sort" onchange="this.form.submit()">
+            <option value="" th:selected="${selectedSort==null}" >Default Sorting</option>
+            <option value="by-name-asc" th:selected="${selectedSort=='by-name-asc'}">Sort By Name a-z</option>
+            <option value="by-name-desc" th:selected="${selectedSort == 'by-name-desc'}">Sort By Name z-a</option>
+            <option value="price-low-high" th:selected="${selectedSort == 'price-low-high'}">Price low to high</option>
+            <option value="price-high-low" th:selected="${selectedSort == 'price-high-low'}">Price high to low</option>
         </select>
+        </form>
     </div>
     <div class="row">
         <div class="col-4" th:each="product : ${products}">
@@ -69,8 +71,10 @@
         <div class="page-btn">
         <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
               th:classappend="${currentPage == pageNum ? ' active' : ''}">
+<!--            <a th:text="${pageNum + 1}"-->
+<!--               th:href="@{/products(page=${pageNum})}"></a>-->
             <a th:text="${pageNum + 1}"
-               th:href="@{/products(page=${pageNum})}"></a>
+               th:href="@{/products(page=${pageNum}, sort=${selectedSort})}"></a>
         </span>
         </div>
 

@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,4 +32,19 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> getProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Product> getSortedProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
+
+//    @Override
+//    public Page<Product> getProductsByName(Pageable pageable) {
+//        return productRepository.findByName(pageable);
+//    }
+//
+//    @Override
+//    public Page<Product> getProductsByPrice(Pageable pageable) {
+//        return productRepository.findByPrice(pageable);
+//    }
 }
