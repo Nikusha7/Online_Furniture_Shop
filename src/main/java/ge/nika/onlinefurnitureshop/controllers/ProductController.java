@@ -45,13 +45,15 @@ public class ProductController {
     @GetMapping
     public String getProducts(@RequestParam(name = "page", defaultValue = "0") int pageNumber,
                               @RequestParam(name = "sort", required = false) String sort,
+                              @RequestParam(name = "category", required = false) String category,
                               Model model) {
 
         Page<Product> products = null;
         int pageSize = 12; // Display 12 products per page
 //        Pageable pageable = PageRequest.of(pageNumber, pageSize); // displaying 12 products
         Page<Product> productsPage;
-        System.out.println("\npageNumber=" + pageNumber + "\npageSize=" + pageSize + "\nsort=" + sort);
+        System.out.println("\npageNumber=" + pageNumber + "\npageSize=" + pageSize + "\nsort=" + sort + "\ncategory" + category);
+//        TODO: sorting by category must be done. after sorting by one category for example chair, then filtering and paging should happen on those products
         if (sort != null) {
             Pageable pageable;
             switch (sort) {
@@ -83,7 +85,7 @@ public class ProductController {
         }
 
         List<Product> productList = products.getContent();
-        for (Product p : productList){
+        for (Product p : productList) {
             System.out.println(p.toString());
         }
 
@@ -92,6 +94,7 @@ public class ProductController {
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", products.getTotalPages());
         model.addAttribute("selectedSort", sort); // Pass selected sort to the view
+        model.addAttribute("category", category);
 
         return "html/product/all_products";
     }
