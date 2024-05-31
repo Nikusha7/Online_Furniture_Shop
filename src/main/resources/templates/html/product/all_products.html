@@ -42,8 +42,9 @@
 <div class="small-container">
     <div class="row row-2">
         <h2>All Products</h2>
-<!--        we should pass category if it exists-->
+        <!--        we should pass category if it exists-->
         <form th:action="@{/products}" method="get">
+            <input type="hidden" name="category" th:value="${selectedCategory}"/>
             <select name="sort" onchange="this.form.submit()">
                 <option value="" th:selected="${selectedSort==null}">Default Sorting</option>
                 <option value="by-name-asc" th:selected="${selectedSort=='by-name-asc'}">Sort By Name a-z</option>
@@ -61,28 +62,28 @@
             <div class="category-title">Categories</div>
             <div class="category-list">
                 <ul>
-                    <li><a th:href="@{/products/(category='armchair')}">Armchair</a></li>
-                    <li><a th:href="@{/products/(category='chair')}">Chair</a></li>
-                    <li><a th:href="@{/products/(category='sofa')}">Sofa</a></li>
+                    <li><a th:href="@{/products/category(category='armchair')}">Armchair</a></li>
+                    <li><a th:href="@{/products/category(category='chair')}">Chair</a></li>
+                    <li><a th:href="@{/products/category(category='sofa')}">Sofa</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="row">
-                <div class="col-4" th:each="product : ${products}">
-                    <a th:href="@{/products/single_product(id=${product.id})}">
-                        <img th:src="@{${product.getImageUrl()}}" alt="Product Image">
-                        <h4 th:text="${product.getName()}"></h4>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-alt"></i>
-                            <i class="fa fa-star-half-alt"></i>
-                        </div>
-                        <p th:text="${product.getPrice()}+'$'"></p>
-                    </a>
-                </div>
+            <div class="col-4" th:each="product : ${products}">
+                <a th:href="@{/products/single_product(id=${product.id})}">
+                    <img th:src="@{${product.getImageUrl()}}" alt="Product Image">
+                    <h4 th:text="${product.getName()}"></h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-alt"></i>
+                        <i class="fa fa-star-half-alt"></i>
+                    </div>
+                    <p th:text="${product.getPrice()}+'$'"></p>
+                </a>
+            </div>
             <!-- Pagination -->
             <div class="page-btn">
         <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
@@ -90,17 +91,9 @@
 <!--            <a th:text="${pageNum + 1}"-->
             <!--               th:href="@{/products(page=${pageNum})}"></a>-->
             <a th:text="${pageNum + 1}"
-               th:href="@{/products(page=${pageNum}, sort=${selectedSort})}"></a>
+               th:href="@{/products(page=${pageNum}, sort=${selectedSort}, category=${selectedCategory})}"></a>
         </span>
             </div>
-
-            <!--    <div class="page-btn">-->
-            <!--        <span>1</span>-->
-            <!--        <span>2</span>-->
-            <!--        <span>3</span>-->
-            <!--        <span>4</span>-->
-            <!--        <span>&#8594</span>-->
-            <!--    </div>-->
         </div>
     </div>
 </div>

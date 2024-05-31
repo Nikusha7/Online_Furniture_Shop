@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,6 +42,33 @@ public class ProductController {
 //        return "html/product/all_products";
 //    }
 
+    @GetMapping("/category")
+    public String getProductsByCategory(@RequestParam(name = "page", defaultValue = "0") int pageNumber,
+                                        @RequestParam(name = "sort", required = false) String sort,
+                                        @RequestParam(name = "category", required = false) String category,
+                                        Model model) {
+        int pageSize = 12;
+
+        System.out.println("/product/category:");
+        System.out.println("\npageNumber=" + pageNumber + "\npageSize=" + pageSize + "\nsort=" + sort + "\ncategory=" + category);
+
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Product> products = productService.getProductsByCategory(category, pageable);
+
+        for (Product p : products.getContent()) {
+            System.out.println(p.toString());
+        }
+
+        model.addAttribute("products", products.getContent());
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", products.getTotalPages());
+        model.addAttribute("selectedSort", sort); // Pass selected sort to the view
+        model.addAttribute("selectedCategory", category);
+
+
+        return "html/product/all_products";
+    }
 
     @GetMapping
     public String getProducts(@RequestParam(name = "page", defaultValue = "0") int pageNumber,
@@ -51,10 +79,15 @@ public class ProductController {
         Page<Product> products = null;
         int pageSize = 12; // Display 12 products per page
 //        Pageable pageable = PageRequest.of(pageNumber, pageSize); // displaying 12 products
-        Page<Product> productsPage;
-        System.out.println("\npageNumber=" + pageNumber + "\npageSize=" + pageSize + "\nsort=" + sort + "\ncategory" + category);
+
+        System.out.println("\npageNumber=" + pageNumber + "\npageSize=" + pageSize + "\nsort=" + sort + "\ncategory=" + category);
 //        TODO: sorting by category must be done. after sorting by one category for example chair, then filtering and paging should happen on those products
-        if (sort != null) {
+
+        if (category != null && sort != null && !sort.isEmpty() && !category.isEmpty()) {
+            products = productService.getProductsByCategory(category, PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "price")));
+        } else if (category != null && !category.isEmpty()) {
+            products = productService.getProductsByCategory(category, PageRequest.of(pageNumber, pageSize));
+        } else if (sort != null) {
             Pageable pageable;
             switch (sort) {
                 case "by-name-asc":
@@ -94,7 +127,7 @@ public class ProductController {
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", products.getTotalPages());
         model.addAttribute("selectedSort", sort); // Pass selected sort to the view
-        model.addAttribute("category", category);
+        model.addAttribute("selectedCategory", category);
 
         return "html/product/all_products";
     }

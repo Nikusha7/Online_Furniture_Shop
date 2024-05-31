@@ -4,6 +4,8 @@ import ge.nika.onlinefurnitureshop.entities.MyUser;
 import ge.nika.onlinefurnitureshop.entities.Product;
 import ge.nika.onlinefurnitureshop.services.ProductService;
 import ge.nika.onlinefurnitureshop.services.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +29,10 @@ public class AdminController {
         System.out.println("admin panel was invoked");
 
         List<MyUser> users = userService.getAllUsers();
-        List<Product> products = productService.getAllProducts();
+        Page<Product> products = productService.getProducts(PageRequest.of(0, Integer.MAX_VALUE));
 
         model.addAttribute("users", users);
-        model.addAttribute("products", products);
+        model.addAttribute("products", products.getContent());
         return "html/admin/admin_panel";
     }
 

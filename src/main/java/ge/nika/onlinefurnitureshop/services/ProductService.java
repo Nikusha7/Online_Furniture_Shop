@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    public List<Product> getAllProducts();
-
     public Optional<Product> getProductById(Integer id);
 
     public Page<Product> getProducts(Pageable pageable);
@@ -18,4 +16,5 @@ public interface ProductService {
 //
 //    public Page<Product> getProductsByPrice(Pageable pageable);
     public Page<Product> getSortedProducts(Pageable pageable);
+    public Page<Product> getProductsByCategory(String category, Pageable pageable);
 }
