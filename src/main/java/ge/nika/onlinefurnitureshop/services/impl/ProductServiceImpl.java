@@ -28,10 +28,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll(pageable);
     }
 
-    @Override
-    public Page<Product> getSortedProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
-    }
+//    @Override
+//    public Page<Product> getSortedProducts(Pageable pageable) {
+//        return productRepository.findAll(pageable);
+//    }
 
     @Override
     public Page<Product> getProductsByCategory(String category, Pageable pageable) {

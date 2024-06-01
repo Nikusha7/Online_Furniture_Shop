@@ -116,6 +116,7 @@ select:focus {
 }
 .containers .category-filter-container{
     border-right: 1px solid #e8e8e8;
+    margin-right: 40px;
 }
 .containers .category-filter-container .category-title {
     font-size: 20px;

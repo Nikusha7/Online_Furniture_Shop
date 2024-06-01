@@ -15,6 +15,6 @@ public interface ProductService {
 //    public Page<Product> getProductsByName(Pageable pageable);
 //
 //    public Page<Product> getProductsByPrice(Pageable pageable);
-    public Page<Product> getSortedProducts(Pageable pageable);
+//    public Page<Product> getSortedProducts(Pageable pageable);
     public Page<Product> getProductsByCategory(String category, Pageable pageable);
 }
