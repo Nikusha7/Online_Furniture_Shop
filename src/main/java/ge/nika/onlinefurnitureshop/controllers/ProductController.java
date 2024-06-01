@@ -65,39 +65,7 @@ public class ProductController {
         }else{
             products = productService.getProducts(pageable);
         }
-
-//        if (category != null && sort != null && !sort.isEmpty() && !category.isEmpty()) {
-//            products = productService.getProductsByCategory(category, PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "price")));
-//        } else if (category != null && !category.isEmpty()) {
-//            products = productService.getProductsByCategory(category, PageRequest.of(pageNumber, pageSize));
-//        } else if (sort != null) {
-//            switch (sort) {
-//                case "by-name-asc":
-//                    pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "name"));
-//                    products = productService.getSortedProducts(pageable);
-//                    break;
-//                case "by-name-desc":
-//                    pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "name"));
-//                    products = productService.getSortedProducts(pageable);
-//                    break;
-//                case "price-low-high":
-//                    pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.ASC, "price"));
-//                    products = productService.getSortedProducts(pageable);
-//                    break;
-//                case "price-high-low":
-//                    pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "price"));
-//                    products = productService.getSortedProducts(pageable);
-//                    break;
-//                default:
-//                    pageable = PageRequest.of(pageNumber, pageSize);
-//                    products = productService.getProducts(pageable);
-//                    break;
-//            }
-//        } else {
-//            pageable = PageRequest.of(pageNumber, pageSize);
-//            // If sort is not selected, fetch products with default sorting
-//            products = productService.getProducts(pageable);
-//        }
+        
 
         List<Product> productList = products.getContent();
         for (Product p : productList) {
