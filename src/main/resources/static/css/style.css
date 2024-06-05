@@ -296,6 +296,16 @@ form .btn:focus{
     outline: none;
 }
 
+form .error-message{
+    font-size: 12px;
+    color: #cc0000;
+    font-weight: bold;
+}
+form .success-logout-message{
+    font-size: 12px;
+    color:#575555;
+    font-weight: bold;
+}
 #LoginForm{
     left: -300px;
 }

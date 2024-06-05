@@ -27,7 +27,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home", "/products/**","/single_product/**", "/cart").permitAll()
+                        .requestMatchers("/", "/home", "/products/**","/single_product/**", "/cart/**").permitAll()
                         .requestMatchers("/perform_register").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/icons/**", "/logos/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")

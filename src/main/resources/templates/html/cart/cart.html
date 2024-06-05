@@ -43,59 +43,42 @@
             <th>Quantity</th>
             <th>Subtotal</th>
         </tr>
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <a th:href="@{/products/single_product(id=38)}">
-                        <img th:src="@{/products/chair/cart-chair1.jpg}">
-                    </a>
-                    <div>
-                        <p>Description</p>
-                        <small>Price: $50.000</small>
-                        <br>
-                        <a th:href="@{/home}">Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
-        </tr>
+        <tr th:each="product : ${productList}">
 
-        <tr>
             <td>
                 <div class="cart-info">
-                    <a th:href="@{/products/single_product(id=38)}">
-                        <img th:src="@{/products/chair/cart-chair1.jpg}">
+                    <a th:href="@{/products/single_product(id=${product.id})}">
+                        <img th:src="@{${product.imageUrl}}">
                     </a>
                     <div>
-                        <p>Description</p>
-                        <small>Price: $50.000</small>
+                        <p th:text="${product.description}">Description</p>
+                        <small th:text="'Price: $' + ${product.price}"></small>
                         <br>
-                        <a th:href="@{/home}">Remove</a>
+                        <a th:href="@{/cart/remove-product(id=${product.id})}">Remove</a>
                     </div>
                 </div>
             </td>
             <td><input type="number" value="1"></td>
-            <td>$50.00</td>
+            <td th:text="'Price: $' + ${product.price}"></td>
         </tr>
+        <!--            <td>-->
+        <!--                <div class="cart-info">-->
+        <!--                    <a th:href="@{/products/single_product(id=38)}">-->
+        <!--                        <img th:src="@{/products/chair/cart-chair1.jpg}">-->
+        <!--                    </a>-->
+        <!--                    <div>-->
+        <!--                        <p>Description</p>-->
+        <!--                        <small>Price: $50.000</small>-->
+        <!--                        <br>-->
+        <!--                        <a th:href="@{/home}">Remove</a>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </td>-->
+        <!--            <td><input type="number" value="1"></td>-->
+        <!--            <td>$50.00</td>-->
+        <!--        </tr>-->
 
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <a th:href="@{/products/single_product(id=38)}">
-                        <img th:src="@{/products/chair/cart-chair1.jpg}">
-                    </a>
-                    <div>
-                        <p>Name</p>
-                        <small>Price: $50.000</small>
-                        <br>
-                        <a th:href="@{/home}">Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
-        </tr>
+
     </table>
 
     <div class="total-price">

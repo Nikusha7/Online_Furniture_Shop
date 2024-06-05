@@ -7,8 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository
         extends JpaRepository<Product, Integer> {
-//    Page<Product> findByName(Pageable pageable, String name);
-//    Page<Product> findByPrice(Pageable pageable, String price);
-//    Page<Product> findAll(Pageable pageable);
     Page<Product> findByCategory(String category, Pageable pageable);
 }

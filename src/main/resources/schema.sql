@@ -1,10 +1,10 @@
 -- -- DDL
 --
--- DROP TABLE IF EXISTS "myUser";
+-- DROP TABLE IF EXISTS "user";
 --
 --
 -- -- Create the users table
--- CREATE TABLE "myUser" (
+-- CREATE TABLE "user" (
 --                         id SERIAL PRIMARY KEY,
 --                         first_name VARCHAR(50) Unique NOT NULL,
 --                         last_name VARCHAR(70) NOT NULL,

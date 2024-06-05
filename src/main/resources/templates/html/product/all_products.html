@@ -32,7 +32,9 @@
                 <li><a th:href="@{/login}">Login</a></li>
             </ul>
         </nav>
-        <img th:src="@{/icons/cart.png}" width="30px" height="30px">
+        <a th:href="@{/cart}">
+            <img th:src="@{/icons/cart.png}" width="30px" height="30px">
+        </a>
         <img th:src="@{/icons/menu.png}" class="menu-icon" onclick="menutoggle()">
     </div>
 </div>

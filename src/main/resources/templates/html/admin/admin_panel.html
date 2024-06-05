@@ -1,101 +1,18 @@
-<!--&lt;!&ndash; resources/templates/admin/user_list.html &ndash;&gt;-->
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>User List</title>-->
-<!--    <style>-->
-<!--        /* Table styles */-->
-<!--        table {-->
-<!--            width: 100%;-->
-<!--            border-collapse: collapse;-->
-<!--        }-->
-
-<!--        th, td {-->
-<!--            padding: 8px;-->
-<!--            text-align: left;-->
-<!--            border-bottom: 1px solid #ddd;-->
-<!--        }-->
-
-<!--        /* Header styles */-->
-<!--        thead {-->
-<!--            background-color: #f2f2f2;-->
-<!--        }-->
-
-<!--        /* Row hover effect */-->
-<!--        tr:hover {-->
-<!--            background-color: #f5f5f5;-->
-<!--        }-->
-
-<!--        /* Table container */-->
-<!--        .table-container {-->
-<!--            margin-top: 20px;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="table-container">-->
-<!--    <h1>User List</h1>-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>ID</th>-->
-<!--            <th>First Name</th>-->
-<!--            <th>Last Name</th>-->
-<!--            <th>Email</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        &lt;!&ndash; Loop through users and display each user &ndash;&gt;-->
-<!--        <tr th:each="user : ${users}">-->
-<!--            <td th:text="${user.id}"></td>-->
-<!--            <td th:text="${user.firstName}"></td>-->
-<!--            <td th:text="${user.lastName}"></td>-->
-<!--            <td th:text="${user.email}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-<!-- resources/templates/admin/user_list.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User List</title>
-    <style>
-        /* Table styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        /* Header styles */
-        thead {
-            background-color: #f2f2f2;
-        }
-
-        /* Row hover effect */
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        /* Table container */
-        .table-container {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="icon" th:href="@{/icons/icon1.jpg}" type="image/x-icon" id="favicon">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 </head>
 <body>
 <div class="table-container">
     <h1>User List</h1>
+    <!-- Check if message exists in the model and display it if present -->
+    <div th:if="${userMessage}" class="user-message" th:text="${userMessage}"></div>
     <table>
         <thead>
         <tr>
@@ -112,6 +29,12 @@
             <td th:text="${user.getFirstName()}"></td>
             <td th:text="${user.getLastName()}"></td>
             <td th:text="${user.getEmail()}"></td>
+            <td>
+                <form method="post" th:action="@{/admin/delete-user}">
+                    <input type="hidden" name="userId" th:value="${user.getId()}">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -120,6 +43,16 @@
 <!-- Add a section for displaying products -->
 <div class="table-container">
     <h1>Product List</h1>
+    <!-- Check if message exists in the model and display it if present -->
+    <div th:if="${productMessage}" class="product-message" th:text="${productMessage}"></div>
+    <form action="#" id="addProductForm" th:action="@{/admin/add-product}" th:object="${productDTO}" method="post">
+        <input type="text" th:field="*{name}" placeholder="Name" required>
+        <input type="text" th:field="*{category}" placeholder="product category" required>
+        <input type="text" th:field="*{description}" placeholder="Description" required>
+        <input type="number" th:field="*{price}" placeholder="price" required>
+        <input type="text" th:field="*{imageUrl}" placeholder="/products/chair/chair1.jpg" required>
+        <button type="submit" class="add-product-btn">Add Product</button>
+    </form>
     <table>
         <thead>
         <tr>
@@ -138,9 +71,18 @@
             <td th:text="${product.getDescription()}"></td>
             <td th:text="${product.getPrice()}"></td>
             <td th:text="${product.getCategory()}"></td>
+            <td>
+                <form method="post" th:action="@{/admin/delete-product}">
+                    <input type="hidden" name="productId" th:value="${product.getId()}">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
 </body>
 </html>
+
+
+

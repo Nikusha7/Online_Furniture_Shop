@@ -32,7 +32,9 @@
                 <li><a th:href="@{/login}">Login</a></li>
             </ul>
         </nav>
-        <img th:src="@{/icons/cart.png}" width="30px" height="30px">
+        <a th:href="@{/cart}">
+            <img th:src="@{/icons/cart.png}" width="30px" height="30px">
+        </a>
         <img th:src="@{/icons/menu.png}" class="menu-icon" onclick="menutoggle()">
     </div>
 </div>
@@ -63,8 +65,14 @@
             <p th:text="'Home / '+${product.getCategory()}"></p>
             <h1 th:text="${product.getName()}"></h1>
             <h4 th:text="${product.getPrice()} + '$'"></h4>
-            <input type="number" value="1">
-            <a th:href="@{/home}" class="btn">Add To Cart</a>
+            <form th:action="@{/cart/add-product}" method="post">
+                <input type="number" name="quantity" value="1">
+                <input type="hidden" name="id" th:value="${product.getId()}">
+                <button type="submit" class="btn">Add To Cart</button>
+            </form>
+<!--            <input type="number" value="1">-->
+<!--&lt;!&ndash;            /products/single_product(id=${product.id})&ndash;&gt;-->
+<!--            <a th:href="@{/cart/add-product(id=${product.id})}" class="btn">Add To Cart</a>-->
             <h3>Product Details <i class="fa fa-indent"></i></h3>
             <br>
             <p th:text="

@@ -1,11 +1,10 @@
 package ge.nika.onlinefurnitureshop.security;
 
-import ge.nika.onlinefurnitureshop.entities.MyUser;
+import ge.nika.onlinefurnitureshop.entities.User;
 import ge.nika.onlinefurnitureshop.entities.Role;
 import ge.nika.onlinefurnitureshop.services.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,10 +25,10 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<MyUser> user = userService.findByEmail(email);
+        Optional<User> user = userService.findByEmail(email);
         if (user.isPresent()) {
-            MyUser userObj = user.get();
-            return new User(userObj.getEmail(), userObj.getPassword(), mapRolesToAuthorities(userObj.getRoles()));
+            User userObj = user.get();
+            return new org.springframework.security.core.userdetails.User(userObj.getEmail(), userObj.getPassword(), mapRolesToAuthorities(userObj.getRoles()));
         } else {
             throw new UsernameNotFoundException("Invalid email or password" + email);
         }
